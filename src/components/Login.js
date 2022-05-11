@@ -26,7 +26,7 @@ const Login = () => {
             .then(data => {
                 if (data.success) {
                     localStorage.setItem('accessToken', data.accessToken)
-                    navigate('/order');
+                    navigate('/orders');
                 }
                 console.log(data);
             })
