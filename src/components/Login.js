@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const inputStyle = {
     width: '100%',
@@ -6,6 +7,7 @@ const inputStyle = {
     marginBottom: '10px'
 }
 const Login = () => {
+    const navigate = useNavigate();
 
     const handleLogin = (event) => {
         event.preventDefault();
@@ -22,10 +24,14 @@ const Login = () => {
         })
             .then(res => res.json())
             .then(data => {
+                if (data.success) {
+                    localStorage.setItem('accessToken', data.accessToken)
+                    navigate('/order');
+                }
                 console.log(data);
             })
 
-        //console.log(email, password);
+
     }
     return (
         <form onSubmit={handleLogin} style={{ width: '50%', margin: '20px auto' }}>
