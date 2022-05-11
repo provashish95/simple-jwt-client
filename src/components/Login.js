@@ -9,10 +9,23 @@ const Login = () => {
 
     const handleLogin = (event) => {
         event.preventDefault();
+
         const email = event.target.email.value;
         const password = event.target.password.value;
 
-        console.log(email, password);
+        fetch('http://localhost:5000/login', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify({ email, password }),
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+            })
+
+        //console.log(email, password);
     }
     return (
         <form onSubmit={handleLogin} style={{ width: '50%', margin: '20px auto' }}>
